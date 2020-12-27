@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
 describe('QCObjects Main Test', function () {
-  require('qcobjects');
+  require('../QCObjects');
+  logger.debugEnabled=true;
+  logger.infoEnabled=true;
+  logger.warnEnabled=true;
 
   it('Class Declaration Test Spec', function () {
     Class('Main', Object, {
@@ -31,13 +34,23 @@ describe('QCObjects Main Test', function () {
     logger.debug('Existence of Effect Class... OK');
   });
 
+  it('Existence of _DataStringify Function Helper', function () {
+    expect(typeof _DataStringify).toEqual('function');
+    logger.debug('Existence of _DataStringify Function Helper... OK');
+  });
+
+  it('Existence of CONFIG global Class', function () {
+    expect(typeof CONFIG.__definition).toEqual('object');
+    logger.debug('Existence of CONFIG global Class... OK');
+  });
+
   it('global as QCObjects global', function () {
     expect(typeof global.__definition).toEqual('object');
     logger.debug('global as QCObjects global... OK');
   });
 
   it('Existence of QCObjects SDK', function () {
-    expect(typeof global._sdk_).toEqual('object');
+    expect(global.hasOwnProperty('_sdk_')).toEqual(true);
     logger.debug('Existence of QCObjects SDK... OK');
   });
 
